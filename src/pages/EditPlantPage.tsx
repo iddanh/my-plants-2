@@ -50,16 +50,14 @@ export function EditPlantPage() {
 
   return (
     <Layout title="Edit plant" back>
-      <div>
-        <PlantForm initial={plant} submitLabel="Save changes" onSubmit={handleSubmit} />
-        <button
-          type="button"
-          onClick={handleDelete}
-          className="mt-4 text-sm font-medium text-red-600 transition hover:text-red-700"
-        >
-          Delete plant
-        </button>
-      </div>
+      <PlantForm initial={plant} submitLabel="Save changes" onSubmit={handleSubmit} />
+      <button
+        type="button"
+        onClick={handleDelete}
+        className="mt-4 text-sm font-medium text-red-600 transition hover:text-red-700"
+      >
+        Delete plant
+      </button>
     </Layout>
   );
 }

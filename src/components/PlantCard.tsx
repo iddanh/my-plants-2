@@ -54,6 +54,12 @@ export function PlantCard({ plant, onWater }: Props) {
           <h3 className="truncate font-semibold text-gray-900">{plant.name}</h3>
           <UrgencyBadge urgency={urgency} />
         </div>
+        {plant.location && (
+          <p className="flex items-center gap-1 text-sm text-gray-400">
+            <PinIcon />
+            <span className="truncate">{plant.location}</span>
+          </p>
+        )}
         <p className="text-sm text-gray-500">
           Watered {formatRelativeDays(plant.lastWateredAt).toLowerCase()}
         </p>
@@ -70,6 +76,26 @@ export function PlantCard({ plant, onWater }: Props) {
         />
       )}
     </div>
+  );
+}
+
+function PinIcon() {
+  return (
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className="shrink-0"
+    >
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
   );
 }
 
