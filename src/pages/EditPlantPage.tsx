@@ -50,7 +50,7 @@ export function EditPlantPage() {
 
   return (
     <Layout title="Edit plant" back>
-      <div className="max-w-lg">
+      <div>
         <PlantForm initial={plant} submitLabel="Save changes" onSubmit={handleSubmit} />
         <button
           type="button"

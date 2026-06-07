@@ -34,7 +34,7 @@ export function Layout({ title, back, action, children }: Props) {
         </div>
       </header>
 
-      <main className="safe-bottom mx-auto max-w-4xl px-4 py-5 my-5">{children}</main>
+      <main className="safe-bottom mx-auto w-full max-w-4xl px-4 py-5 my-5">{children}</main>
     </div>
   );
 }

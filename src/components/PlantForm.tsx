@@ -146,23 +146,31 @@ export function PlantForm({ initial, submitLabel, onSubmit }: Props) {
           />
         </Field>
 
-        <Field label="Water every (days)" error={errors.wateringIntervalDays?.message}>
-          <input type="number" min={1} max={365} {...register('wateringIntervalDays')} className="input" />
-        </Field>
-
-        {initial && (
-          <Field label="Last watered" error={errors.lastWateredDate?.message}>
-            <input type="date" max={today} {...register('lastWateredDate')} className="input" />
+        <div className="grid grid-cols-2 gap-4">
+          <Field
+            label="Water every (days)"
+            error={errors.wateringIntervalDays?.message}
+            className={initial ? undefined : 'col-span-2'}
+          >
+            <input type="number" min={1} max={365} {...register('wateringIntervalDays')} className="input" />
           </Field>
-        )}
 
-        <Field label="Species (optional)">
-          <input {...register('species')} placeholder="Monstera deliciosa" className="input" />
-        </Field>
+          {initial && (
+            <Field label="Last watered" error={errors.lastWateredDate?.message}>
+              <input type="date" max={today} {...register('lastWateredDate')} className="input" />
+            </Field>
+          )}
+        </div>
 
-        <Field label="Location (optional)">
-          <input {...register('location')} placeholder="Living room window" className="input" />
-        </Field>
+        <div className="grid grid-cols-2 gap-4">
+          <Field label="Species (optional)">
+            <input {...register('species')} placeholder="Monstera deliciosa" className="input" />
+          </Field>
+
+          <Field label="Location (optional)">
+            <input {...register('location')} placeholder="Living room window" className="input" />
+          </Field>
+        </div>
 
         <Field label="Notes (optional)">
           <textarea {...register('notes')} rows={3} className="input resize-none" />
@@ -196,13 +204,15 @@ function Field({
   label,
   error,
   children,
+  className,
 }: {
   label: string;
   error?: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <div>
+    <div className={className}>
       <label className="mb-1.5 block text-sm font-medium text-gray-700">{label}</label>
       {children}
       {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
