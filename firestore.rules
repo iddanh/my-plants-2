@@ -1,0 +1,12 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // The app signs in anonymously on load, so every legitimate request carries
+    // an auth token. This blocks unauthenticated scanners/bots from reading or
+    // writing while keeping the app login-free for the family.
+    match /plants/{plantId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
