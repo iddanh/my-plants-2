@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { WateringFx } from './WateringFx';
 
 interface Props {
   onWater: (daysAgo: number) => void;
@@ -19,7 +20,16 @@ const OPTIONS = [
  */
 export function SplitWaterButton({ onWater, disabled, block }: Props) {
   const [open, setOpen] = useState(false);
+  const [fxKey, setFxKey] = useState(0);
+  const [showFx, setShowFx] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  function water(daysAgo: number) {
+    setOpen(false);
+    setFxKey((k) => k + 1);
+    setShowFx(true);
+    onWater(daysAgo);
+  }
 
   useEffect(() => {
     if (!open) return;
@@ -43,7 +53,7 @@ export function SplitWaterButton({ onWater, disabled, block }: Props) {
         disabled={disabled}
         onClick={(e) => {
           stop(e);
-          onWater(0);
+          water(0);
         }}
         className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-l-lg bg-green-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-green-700 active:bg-green-800 disabled:opacity-50 ${
           block ? '' : 'whitespace-nowrap'
@@ -79,8 +89,7 @@ export function SplitWaterButton({ onWater, disabled, block }: Props) {
               role="menuitem"
               onClick={(e) => {
                 stop(e);
-                setOpen(false);
-                onWater(opt.daysAgo);
+                water(opt.daysAgo);
               }}
               className="block w-full px-3 py-2 text-left text-sm text-gray-700 hover:bg-green-50"
             >
@@ -89,6 +98,8 @@ export function SplitWaterButton({ onWater, disabled, block }: Props) {
           ))}
         </div>
       )}
+
+      {showFx && <WateringFx key={fxKey} onDone={() => setShowFx(false)} />}
     </div>
   );
 }

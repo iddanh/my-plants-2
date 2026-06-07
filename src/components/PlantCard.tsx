@@ -26,9 +26,9 @@ export function PlantCard({ plant, onWater }: Props) {
           navigate(`/plant/${plant.id}`);
         }
       }}
-      className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+      className="group flex cursor-pointer flex-col rounded-2xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
     >
-      <div className="aspect-square w-full overflow-hidden bg-green-50">
+      <div className="aspect-square w-full overflow-hidden rounded-t-2xl bg-green-50">
         {plant.imageUrl ? (
           <img
             src={thumbUrl(plant.imageUrl, 500)}

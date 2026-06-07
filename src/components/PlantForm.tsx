@@ -150,9 +150,11 @@ export function PlantForm({ initial, submitLabel, onSubmit }: Props) {
           <input type="number" min={1} max={365} {...register('wateringIntervalDays')} className="input" />
         </Field>
 
-        <Field label="Last watered" error={errors.lastWateredDate?.message}>
-          <input type="date" max={today} {...register('lastWateredDate')} className="input" />
-        </Field>
+        {initial && (
+          <Field label="Last watered" error={errors.lastWateredDate?.message}>
+            <input type="date" max={today} {...register('lastWateredDate')} className="input" />
+          </Field>
+        )}
 
         <Field label="Species (optional)">
           <input {...register('species')} placeholder="Monstera deliciosa" className="input" />

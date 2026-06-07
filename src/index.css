@@ -37,3 +37,87 @@ body {
     @apply w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-gray-900 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200;
   }
 }
+
+/* Interactive elements should show the hand cursor. */
+button:not(:disabled),
+label:has(> input[type='file']),
+[role='button'] {
+  cursor: pointer;
+}
+
+/* Watering feedback animation */
+.fx-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 50;
+}
+.fx-card {
+  animation: fx-pop 1.4s ease forwards;
+}
+.fx-can {
+  transform-box: fill-box;
+  transform-origin: 72% 78%;
+  animation: fx-tilt 1.4s ease-in-out;
+}
+.fx-drop {
+  transform-box: fill-box;
+  animation: fx-drop 0.6s ease-in 2 both;
+}
+
+@keyframes fx-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateY(8px);
+  }
+  12% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  78% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+}
+@keyframes fx-tilt {
+  0% {
+    transform: rotate(0);
+  }
+  22% {
+    transform: rotate(-15deg);
+  }
+  72% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+@keyframes fx-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.7);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(36px) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-card,
+  .fx-can,
+  .fx-drop {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
