@@ -2,7 +2,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Layout } from '../components/Layout';
 import { PlantForm } from '../components/PlantForm';
 import { usePlant } from '../hooks/usePlants';
-import { updatePlant } from '../data/plants';
+import { deletePlant, updatePlant } from '../data/plants';
 import type { PlantInput } from '../types';
 
 export function EditPlantPage() {
@@ -34,13 +34,31 @@ export function EditPlantPage() {
   async function handleSubmit(input: PlantInput) {
     if (!plant) return;
     await updatePlant(plant.id, input);
-    navigate(`/plant/${plant.id}`, { replace: true });
+    navigate('/', { replace: true });
+  }
+
+  async function handleDelete() {
+    if (!plant) return;
+    if (!window.confirm(`Delete “${plant.name}”? This can’t be undone.`)) return;
+    try {
+      await deletePlant(plant.id);
+      navigate('/', { replace: true });
+    } catch (err) {
+      console.error('Failed to delete plant', err);
+    }
   }
 
   return (
     <Layout title="Edit plant" back>
       <div className="max-w-lg">
         <PlantForm initial={plant} submitLabel="Save changes" onSubmit={handleSubmit} />
+        <button
+          type="button"
+          onClick={handleDelete}
+          className="mt-4 text-sm font-medium text-red-600 transition hover:text-red-700"
+        >
+          Delete plant
+        </button>
       </div>
     </Layout>
   );

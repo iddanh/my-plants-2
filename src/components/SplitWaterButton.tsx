@@ -18,7 +18,7 @@ const OPTIONS = [
  * Split button: the large part marks "watered today"; the caret opens a menu
  * to record watering 1–3 days ago.
  */
-export function SplitWaterButton({ onWater, disabled, block }: Props) {
+export function SplitWaterButton({ onWater, disabled, block = true }: Props) {
   const [open, setOpen] = useState(false);
   const [fxKey, setFxKey] = useState(0);
   const [showFx, setShowFx] = useState(false);

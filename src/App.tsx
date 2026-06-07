@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
 import { HomePage } from './pages/HomePage';
+import { InstallToast } from './components/InstallToast';
 
 // Lazy-load the form/crop-heavy pages so the home grid loads first.
 const PlantDetailPage = lazy(() =>
@@ -40,16 +41,19 @@ export default function App() {
   }
 
   return (
-    <HashRouter>
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/add" element={<AddPlantPage />} />
-          <Route path="/plant/:id" element={<PlantDetailPage />} />
-          <Route path="/plant/:id/edit" element={<EditPlantPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Suspense>
-    </HashRouter>
+    <>
+      <HashRouter>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/add" element={<AddPlantPage />} />
+            <Route path="/plant/:id" element={<PlantDetailPage />} />
+            <Route path="/plant/:id/edit" element={<EditPlantPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
+      </HashRouter>
+      <InstallToast />
+    </>
   );
 }

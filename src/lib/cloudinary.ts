@@ -43,3 +43,14 @@ export function thumbUrl(url: string, size = 400): string {
   const transform = `c_fill,g_auto,w_${size},h_${size},f_auto,q_auto`;
   return `${url.slice(0, idx + marker.length)}${transform}/${url.slice(idx + marker.length)}`;
 }
+
+/**
+ * Full-image URL (downscaled to fit a box, never cropped) for the lightbox view.
+ */
+export function viewUrl(url: string, size = 1400): string {
+  const marker = '/upload/';
+  const idx = url.indexOf(marker);
+  if (idx === -1) return url;
+  const transform = `c_limit,w_${size},h_${size},f_auto,q_auto`;
+  return `${url.slice(0, idx + marker.length)}${transform}/${url.slice(idx + marker.length)}`;
+}
