@@ -50,8 +50,15 @@ Firestore rules + the restricted Cloudinary upload preset, not from hiding them.
 
 ## Deployment (GitHub Pages)
 
+> **Status:** already configured and live at **https://iddanh.github.io/my-plants-2/**.
+> Pages is set to the **GitHub Actions** build type and the eight `VITE_*` values are stored as
+> repository **Actions Variables**, so **every push to `main` auto-deploys** — no further setup
+> needed. The steps below document how it was wired up (e.g. for a fresh fork).
+
 1. Push to GitHub. In the repo: Settings → **Pages** → Source = **GitHub Actions**.
-2. Settings → Secrets and variables → **Actions → Variables** → add all eight `VITE_*` values.
+2. Settings → Secrets and variables → **Actions → Variables** → add all eight `VITE_*` values
+   (same as your `.env.local`; they're public-safe). With `gh` installed you can script this:
+   `gh variable set VITE_FIREBASE_PROJECT_ID --body "my-plants-2"` (repeat per variable).
 3. Make sure `base` in [`vite.config.ts`](./vite.config.ts) matches your repo name
    (`/my-plants-2/`), or `/` if you use a custom domain.
 4. Push to `main` — the workflow in [.github/workflows/deploy.yml](./.github/workflows/deploy.yml)
